@@ -1,27 +1,26 @@
 class lovetangle {
-  constructor(lx, by, w, h) {
-    this.lx = lx
-    this.by = by
-    this.width = w
-    this.height = h
+  constructor(attrs) {
+    this.lx = attrs.left_x
+    this.by = attrs.bottom_y
+    this.width = attrs.width
+    this.height = attrs.height
   }
 }
 
 function get_intersection(lt1, lt2) {
-  lt1.lx > lt2.lx ? let ilx = lt1.lx : let ilx = lt2.lx
-  lt1.by > lt2.by ? let iby = lt1.by : let iby = lt2.by
-  lt2.lx + lt2.width > lt1.lx + lt1.width ? let iw = (lt1.lx + w) - ilx : let iw = lt2.width
-  lt2.by + lt2.height > lt1.by + lt1.height ? let ih = (lt1.by + h) - iby : let ih = lt2.height
-
-  return [ilx, iby, iw, ih]
+  let ilx = (lt1.lx > lt2.lx) ? lt1.lx : lt2.lx
+  let iby = (lt1.by > lt2.by) ? lt1.by : lt2.by
+  let iw = (lt2.lx + lt2.width > lt1.lx + lt1.width) ? (lt1.lx + lt1.width) - ilx : lt2.width
+  let ih = (lt2.by + lt2.height > lt1.by + lt1.height) ? (lt1.by + lt1.height) - iby : lt2.height
+  return {left_x: ilx, bottom_y: iby, width: iw, height: ih}
 }
 
 
-function find_intersection(lt1, lt2) {
+function find_overlap(lt1, lt2) {
   if(lt1.lx > lt2.lx + lt2.width || lt1.by > lt2.by + lt2.height) {
     return new lovetangle(0, 0, 0, 0)
   } else {
     let intersection = get_intersection(lt1, lt2)
-    return new lovetangle(intersection.ilx, intersection.iby, intersection.iw, intersection.ih)
+    return new lovetangle(intersection)
   }
 }

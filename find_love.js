@@ -17,8 +17,8 @@ function get_intersection(lt1, lt2) {
 
 
 function find_overlap(lt1, lt2) {
-  if(lt1.lx > lt2.lx + lt2.width || lt1.by > lt2.by + lt2.height) {
-    return new lovetangle(0, 0, 0, 0)
+  if(lt1.lx >= lt2.lx + lt2.width || lt1.by >= lt2.by + lt2.height) {
+    return new lovetangle({left_x: 0, bottom_y: 0, width: 0, height: 0})
   } else {
     let intersection = get_intersection(lt1, lt2)
     return new lovetangle(intersection)

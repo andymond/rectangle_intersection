@@ -7,6 +7,15 @@ class lovetangle {
   }
 }
 
+function get_corners(lt) {
+  let btm_left = [lx, by]
+  let top_left = [lx, (by + h)]
+  let top_right = [(lx + w), (by + h)]
+  let btm_right = [(lx + w), by]
+  return [ btm_left, top_left, top_right, btm_right ]
+}
+
+
 function find_intersection(lt1, lt2) {
-  
+
 }
